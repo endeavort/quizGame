@@ -46,6 +46,9 @@ const quiz = [
 // クイズ番号
 let quizIndex = 0;
 
+// 正解数
+let score = 0;
+
 // HTMLオブジェクトを定数にする(わかりやすいように頭に$をつけるのが良い)
 const $button = document.getElementsByTagName("button");
 
@@ -67,16 +70,20 @@ const clickHandler = (e) => {
   // 正誤判定
   if (quiz[quizIndex].correct === e.target.textContent) {
     window.alert("正解！");
-    quizIndex++;
+    score++;
   } else {
     window.alert("不正解");
   }
+
+  quizIndex++;
 
   // 今何問目か確認
   if (quizIndex < quiz.length) {
     setupQuiz();
   } else {
-    window.alert("終了");
+    window.alert(
+      "終了!あなたの正解数は" + score + "/" + quiz.length + "です！"
+    );
   }
 };
 
