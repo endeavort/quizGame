@@ -9,44 +9,34 @@ const answers = [
 
 const correct = "透明な卵になる";
 
-// 問題文の書き換え
-document.getElementById("js-question").textContent = question;
+// HTMLオブジェクトを定数にする(わかりやすいように頭に$をつけるのが良い)
+const $button = document.getElementsByTagName("button");
 
-// 選択ボタンの書き換え
-document.getElementsByTagName("button")[0].textContent = answers[0];
-document.getElementsByTagName("button")[1].textContent = answers[1];
-document.getElementsByTagName("button")[2].textContent = answers[2];
-document.getElementsByTagName("button")[3].textContent = answers[3];
+// クイズ作成関数
+const setupQuiz = () => {
+  // 問題文の書き換え
+  document.getElementById("js-question").textContent = question;
+  // ボタンのテキストを書き換え
+  for (let i = 0; i < 4; i++) {
+    $button[i].textContent = answers[i];
+  }
+};
 
-// 正誤判定
-document.getElementsByTagName("button")[0].addEventListener("click", () => {
-  if (correct === document.getElementsByTagName("button")[0].textContent) {
+setupQuiz();
+
+// 正誤判定関数
+// e:イベントオブジェクト
+const clickHandler = (e) => {
+  if (correct === e.target.textContent) {
     window.alert("正解！");
   } else {
     window.alert("不正解");
   }
-});
+};
 
-document.getElementsByTagName("button")[1].addEventListener("click", () => {
-  if (correct === document.getElementsByTagName("button")[1].textContent) {
-    window.alert("正解！");
-  } else {
-    window.alert("不正解");
-  }
-});
-
-document.getElementsByTagName("button")[2].addEventListener("click", () => {
-  if (correct === document.getElementsByTagName("button")[2].textContent) {
-    window.alert("正解！");
-  } else {
-    window.alert("不正解");
-  }
-});
-
-document.getElementsByTagName("button")[3].addEventListener("click", () => {
-  if (correct === document.getElementsByTagName("button")[3].textContent) {
-    window.alert("正解！");
-  } else {
-    window.alert("不正解");
-  }
-});
+// 出力関数
+for (let i = 0; i < 4; i++) {
+  $button[i].addEventListener("click", (e) => {
+    clickHandler(e);
+  });
+}
